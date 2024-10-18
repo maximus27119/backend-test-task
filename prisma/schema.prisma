@@ -18,12 +18,13 @@ model User {
 }
 
 model Project {
-  id     Int           @id @default(autoincrement()) @db.UnsignedInt
-  userId Int           @db.UnsignedInt
-  user   User          @relation(fields: [userId], references: [id])
-  name   String        @db.VarChar(128)
-  url    String        @db.VarChar(128)
-  status ProjectStatus
+  id        Int           @id @default(autoincrement()) @db.UnsignedInt
+  userId    Int           @db.UnsignedInt
+  user      User          @relation(fields: [userId], references: [id])
+  name      String        @db.VarChar(128)
+  url       String        @db.VarChar(128)
+  status    ProjectStatus
+  isDeleted Boolean       @default(false)
 
   expiredAt DateTime?
   createdAt DateTime  @default(now())
@@ -35,5 +36,4 @@ enum ProjectStatus {
   archived
   paused
   expired
-  deleted
 }

@@ -9,4 +9,16 @@ export class ProjectService {
   async findMany(args: Prisma.ProjectFindManyArgs): Promise<Project[]> {
     return this.prismaService.project.findMany(args);
   }
+
+  async findOne(args: Prisma.ProjectFindFirstArgs): Promise<Project> {
+    return this.prismaService.project.findFirst(args);
+  }
+
+  async create(args: Prisma.ProjectCreateArgs): Promise<Project> {
+    return this.prismaService.project.create(args);
+  }
+
+  async update(args: Prisma.ProjectUpdateArgs): Promise<Project> {
+    return this.prismaService.project.update(args);
+  }
 }
