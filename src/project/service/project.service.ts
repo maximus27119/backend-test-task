@@ -21,4 +21,18 @@ export class ProjectService {
   async update(args: Prisma.ProjectUpdateArgs): Promise<Project> {
     return this.prismaService.project.update(args);
   }
+
+  async updateExpiredProjects() {
+    await this.prismaService.project.updateMany({
+      where: {
+        expiredAt: {
+          lt: new Date(),
+        },
+        status: 'active',
+      },
+      data: {
+        status: 'expired',
+      },
+    });
+  }
 }
