@@ -29,7 +29,8 @@ export class AuthService {
       password,
       user?.password,
     );
-    if (isAuthenticated) {
+
+    if (!isAuthenticated) {
       throw new UnauthorizedException();
     }
 

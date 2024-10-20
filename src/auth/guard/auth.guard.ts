@@ -20,6 +20,7 @@ export class AuthGuard implements CanActivate {
     const token = this.extractTokenFromHeader(request);
 
     if (!token) {
+      console.log('No token');
       throw new UnauthorizedException();
     }
 
@@ -29,7 +30,9 @@ export class AuthGuard implements CanActivate {
       });
 
       request['user'] = payload;
-    } catch {
+    } catch (e) {
+      console.log('error in catch');
+      console.error(e);
       throw new UnauthorizedException();
     }
 

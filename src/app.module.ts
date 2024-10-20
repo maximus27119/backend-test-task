@@ -4,8 +4,6 @@ import { UserModule } from './user/module';
 import { AuthModule } from './auth/module';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
-import { ProjectTasksService } from './project/service/project-tasks.service';
-
 @Module({
   imports: [
     AuthModule,

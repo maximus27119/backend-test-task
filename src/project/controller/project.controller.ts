@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -58,8 +59,12 @@ export class ProjectController {
   }
 
   @Get(':id')
-  async getById(@Param('id') id: number, @Request() req): Promise<Project> {
+  async getById(
+    @Param('id', ParseIntPipe) id: number,
+    @Request() req,
+  ): Promise<Project> {
     const userId = req.user.sub as number;
+    console.log(userId);
     return await this.projectService.findOne({
       where: { id, user: { id: userId } },
     });
@@ -79,7 +84,7 @@ export class ProjectController {
 
   @Patch(':id')
   async update(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @Body() dto: ProjectUpdate,
     @Request() req,
   ): Promise<Project> {
@@ -91,7 +96,7 @@ export class ProjectController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number): Promise<Project> {
+  async remove(@Param('id', ParseIntPipe) id: number): Promise<Project> {
     return this.projectService.update({
       where: { id },
       data: { isDeleted: true },
